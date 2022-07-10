@@ -31,6 +31,7 @@ void main(List<String> arguments) {
   stdout.write(
     '\n${welcomeMessage.blue().bold()}\n${option1.yellow().bold()}\n${option2.cyan()}\n\nwhat would you like to do? ',
   );
+
   final line = stdin.readLineSync();
   if (line == 'c') {
     stdout.write('Input your AstraDB ID: ');
