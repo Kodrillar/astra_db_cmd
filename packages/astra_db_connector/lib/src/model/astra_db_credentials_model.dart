@@ -1,5 +1,5 @@
-class AstraDbCredential {
-  const AstraDbCredential({
+class AstraDbPackageCredential {
+  const AstraDbPackageCredential({
     required this.astraDbId,
     required this.astraDbRegion,
     required this.keyspace,
