@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 Colorize errorMessage =
     Colorize('Network error! Kindly connect to the internet and try again.');
 
-class DatabaseTableService {
-  Uri getBaseUrl({
+abstract class DatabaseTableService {
+  static Uri getBaseUrl({
     required scheme,
     required host,
     required path,
@@ -18,7 +18,7 @@ class DatabaseTableService {
         host: host,
         path: path,
       );
-  Future<dynamic> getDatabaseTable(
+  static Future<dynamic> getDatabaseTable(
       {required astraDbId,
       required astraDbRegion,
       required keyspace,
@@ -48,7 +48,7 @@ class DatabaseTableService {
     }
   }
 
-  requestResponse(http.Response response) {
+  static requestResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
         return jsonDecode(response.body);

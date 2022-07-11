@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:astra_db_cmd/service/database_table_service.dart';
 import 'package:colorize/colorize.dart';
 
-DatabaseTableService databaseTableService = DatabaseTableService();
+
 void main(List<String> arguments) {
   Future<void> getDatabaseTable(
       {required astraDbId,
@@ -11,7 +11,7 @@ void main(List<String> arguments) {
       required keyspace,
       required astraDbToken}) async {
     try {
-      final tableData = await databaseTableService.getDatabaseTable(
+      final tableData = await DatabaseTableService.getDatabaseTable(
         astraDbId: astraDbId,
         astraDbRegion: astraDbRegion,
         keyspace: keyspace,
