@@ -1,33 +1,16 @@
 import 'dart:io';
+import 'package:astra_db_connector/emit_services.dart';
 
-import 'package:astra_db_cmd/service/database_table_service.dart';
-import 'package:colorize/colorize.dart';
+import 'lib/astra_implement.dart';
 
-DatabaseTableService databaseTableService = DatabaseTableService();
 void main(List<String> arguments) {
-  Future<void> getDatabaseTable(
-      {required astraDbId,
-      required astraDbRegion,
-      required keyspace,
-      required astraDbToken}) async {
-    try {
-      final tableData = await databaseTableService.getDatabaseTable(
-        astraDbId: astraDbId,
-        astraDbRegion: astraDbRegion,
-        keyspace: keyspace,
-        astraDbToken: astraDbToken,
-      );
-      print(tableData);
-    } on SocketException {
-      print(errorMessage.red().bold());
-    } catch (ex) {
-      print(errorMessage.red().bold());
-    }
-  }
-
-  Colorize welcomeMessage = Colorize('Welcome to Astra_db_cmd!🙂️\n');
-  Colorize option1 = Colorize('Check tables [c]');
-  Colorize option2 = Colorize('Check keyspace [ck]');
+  var welcomeMessage =
+      AstraPackageCustormErrorHandler("Welcome to Astra_db_cmd!🙂️\n")
+          .getAstraPackageCustomizer;
+  var option1 = AstraPackageCustormErrorHandler('Check tables [c]')
+      .getAstraPackageCustomizer;
+  var option2 = AstraPackageCustormErrorHandler('Check keyspace [ck]')
+      .getAstraPackageCustomizer;
   stdout.write(
     '\n${welcomeMessage.blue().bold()}\n${option1.yellow().bold()}\n${option2.cyan()}\n\nwhat would you like to do? ',
   );
@@ -42,11 +25,10 @@ void main(List<String> arguments) {
     final astraDbToken = stdin.readLineSync();
     stdout.write('Input your Keyspace: ');
     final keyspace = stdin.readLineSync();
-    getDatabaseTable(
-      astraDbId: astraDbId,
-      astraDbRegion: astraDbRegion,
-      keyspace: keyspace,
-      astraDbToken: astraDbToken,
-    );
+    yourDatabaseImplementation(
+        astraDbId: astraDbId,
+        astraDbRegion: astraDbRegion,
+        keyspace: keyspace,
+        astraDbToken: astraDbToken);
   }
 }
