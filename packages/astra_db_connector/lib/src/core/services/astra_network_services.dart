@@ -33,4 +33,6 @@ abstract class AstraDbNetworkServices {
       return jsonDecode(response.body);
     }
   }
+
+  static Future<dynamic> getKeyspacesFromDb()async{}
 }

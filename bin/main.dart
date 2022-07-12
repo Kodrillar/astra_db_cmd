@@ -1,7 +1,8 @@
 import 'dart:io';
-import 'lib/utils/astra_cmd_text.dart';
+import 'package:astra_db_connector/astra_db_connector.dart';
 
-import 'lib/astra_implement.dart';
+import 'lib/repositories/astra_cmd_repository.dart';
+import 'lib/utils/astra_cmd_text.dart';
 
 void main(List<String> arguments) {
   final welcomeText = AstraCommandlineText.getCustomText(MessageText.welcome);
@@ -16,17 +17,20 @@ void main(List<String> arguments) {
   final line = stdin.readLineSync();
   if (line == 'c') {
     stdout.write('Input your AstraDB ID: ');
-    final astraDbId = stdin.readLineSync();
+    final astraDbId = stdin.readLineSync() ?? '';
     stdout.write('Input your AstraDB Region: ');
-    final astraDbRegion = stdin.readLineSync();
+    final astraDbRegion = stdin.readLineSync() ?? '';
     stdout.write('Input your AstraDB Token: ');
-    final astraDbToken = stdin.readLineSync();
+    final astraDbToken = stdin.readLineSync() ?? '';
     stdout.write('Input your Keyspace: ');
-    final keyspace = stdin.readLineSync();
-    yourDatabaseImplementation(
+    final keyspace = stdin.readLineSync() ?? '';
+    AstraCmdDataRepository(
+      AstraDbCredential(
         astraDbId: astraDbId,
         astraDbRegion: astraDbRegion,
+        astraDbToken: astraDbToken,
         keyspace: keyspace,
-        astraDbToken: astraDbToken);
+      ),
+    ).getAstraDbTable();
   }
 }

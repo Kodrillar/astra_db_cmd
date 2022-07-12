@@ -6,9 +6,11 @@ class DatabaseTableService {
   DatabaseTableService(this.dbCredential);
 
   //register your astra database services here
-  Future<dynamic> getDatabaseTable() async {
+  Future<dynamic> getDatabaseTables() async {
     dynamic dbNetworkResponse =
         AstraDbNetworkServices.getTablesFromDb(dbCredential);
     return dbNetworkResponse;
   }
+
+  Future<dynamic> getDatabaseKeyspace() async {}
 }
