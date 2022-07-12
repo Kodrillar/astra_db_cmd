@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:astra_db_connector/emit_services.dart';
+import 'package:astra_db_connector/astra_db_connector.dart';
 
 Future<void> yourDatabaseImplementation(
     {required astraDbId,
@@ -7,17 +7,17 @@ Future<void> yourDatabaseImplementation(
     required keyspace,
     required astraDbToken}) async {
   try {
-    AstraDbPackageCredential astraDbCredential = AstraDbPackageCredential(
+    AstraDbCredential astraDbCredential = AstraDbCredential(
         astraDbId: astraDbId,
         astraDbRegion: astraDbRegion,
         keyspace: keyspace,
         astraDbToken: astraDbToken);
     final tableData =
-        await DatabaseTablePackageService(astraDbCredential).getDatabaseTable();
+        await DatabaseTableService(astraDbCredential).getDatabaseTable();
     print(tableData);
   } on SocketException {
-    print(AstraPackageCustormErrorHandler.erroMessage.red().bold());
+    print(AstraCustomErrorHandler.socketErrorMessage.red().bold());
   } catch (ex) {
-    print(AstraPackageCustormErrorHandler.erroMessage.red().bold());
+    print(AstraCustomErrorHandler(ex.toString()).getErrorMessage.red().bold());
   }
 }

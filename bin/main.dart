@@ -1,18 +1,16 @@
 import 'dart:io';
-import 'package:astra_db_connector/emit_services.dart';
+import 'lib/utils/astra_cmd_text.dart';
 
 import 'lib/astra_implement.dart';
 
 void main(List<String> arguments) {
-  var welcomeMessage =
-      AstraPackageCustormErrorHandler("Welcome to Astra_db_cmd!🙂️\n")
-          .getAstraPackageCustomizer;
-  var option1 = AstraPackageCustormErrorHandler('Check tables [c]')
-      .getAstraPackageCustomizer;
-  var option2 = AstraPackageCustormErrorHandler('Check keyspace [ck]')
-      .getAstraPackageCustomizer;
+  final welcomeText = AstraCommandlineText.getCustomText(MessageText.welcome);
+  final checkTablesText =
+      AstraCommandlineText.getCustomText(MessageText.checkTables);
+  final checkKeyspaceText =
+      AstraCommandlineText.getCustomText(MessageText.checkKeyspace);
   stdout.write(
-    '\n${welcomeMessage.blue().bold()}\n${option1.yellow().bold()}\n${option2.cyan()}\n\nwhat would you like to do? ',
+    '\n$welcomeText\n$checkTablesText\n$checkKeyspaceText\n\nwhat would you like to do? ',
   );
 
   final line = stdin.readLineSync();

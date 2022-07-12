@@ -1,7 +1,7 @@
 //to test http requests
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
-import 'package:astra_db_connector/emit_services.dart';
+import 'package:astra_db_connector/astra_db_connector.dart';
 
 void main(List<String> args) {
   setUp(() {});
