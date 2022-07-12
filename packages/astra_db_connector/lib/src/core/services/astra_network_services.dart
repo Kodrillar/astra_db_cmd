@@ -22,7 +22,7 @@ abstract class AstraDbNetworkServices {
             scheme: 'https',
             host:
                 '${astraDbCredential.astraDbId}-${astraDbCredential.astraDbRegion}.apps.astra.datastax.com',
-            path: '/api/rest/v2/keyspaces/${astraDbCredential.keyspace}/tables',
+            path: '/api/rest/v1/keyspaces/${astraDbCredential.keyspace}/tables',
           ),
           headers: {
             'x-cassandra-token': astraDbCredential.astraDbToken,
