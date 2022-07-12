@@ -31,6 +31,6 @@ void main(List<String> arguments) {
         astraDbToken: astraDbToken,
         keyspace: keyspace,
       ),
-    ).getAstraDbTable();
+    ).getAstraDbTables();
   }
 }
