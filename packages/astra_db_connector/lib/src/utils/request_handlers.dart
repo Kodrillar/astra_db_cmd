@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:colorize/colorize.dart';
+
 import 'package:http/http.dart' as http;
 
 abstract class RequestHandler {
@@ -24,12 +24,4 @@ abstract class RequestHandler {
         throw response;
     }
   }
-}
-
-class AstraCustomErrorHandler {
-  const AstraCustomErrorHandler(this.customText);
-  final String customText;
-  Colorize get getErrorMessage => Colorize(customText);
-  static Colorize get socketErrorMessage =>
-      Colorize("Network error! Kindly connect to the internet and try again.");
 }

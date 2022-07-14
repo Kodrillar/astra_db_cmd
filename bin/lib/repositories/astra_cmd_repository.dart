@@ -5,14 +5,19 @@ class AstraCmdDataRepository {
   AstraCmdDataRepository(this.astraDbCredential);
   final AstraDbCredential astraDbCredential;
 
-  void getAstraDbTables() {
-   _getAstraData<dynamic>(
+  Future<void> getAstraDbTables() async{
+    _getAstraData<dynamic>(
       getDbData: () =>
           DatabaseTableService(astraDbCredential).getDatabaseTables(),
     );
   }
 
-  void getAstraDbKeyspaces() {}
+  Future<void> getAstraDbKeyspaces() async{
+    _getAstraData<dynamic>(
+      getDbData: () =>
+          DatabaseTableService(astraDbCredential).getDatabaseKeyspaces(),
+    );
+  }
 
   Future<void> _getAstraData<T>(
       {required Future<T> Function() getDbData}) async {

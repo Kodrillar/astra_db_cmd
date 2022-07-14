@@ -15,18 +15,23 @@ abstract class AstraDbNetworkServices {
         path: path,
       );
 
+  static getUriHost(String astraDbId, String astraDbRegion) =>
+      '$astraDbId-$astraDbRegion.apps.astra.datastax.com';
+
   static dynamic getTablesFromDb(AstraDbCredential astraDbCredential) async {
-    try {
-      http.Response response = await http.get(
-          getBaseUrl(
-            scheme: 'https',
-            host:
-                '${astraDbCredential.astraDbId}-${astraDbCredential.astraDbRegion}.apps.astra.datastax.com',
-            path: '/api/rest/v1/keyspaces/${astraDbCredential.keyspace}/tables',
+    http.Response response = await http.get(
+        getBaseUrl(
+          scheme: 'https',
+          host: getUriHost(
+            astraDbCredential.astraDbId,
+            astraDbCredential.astraDbRegion,
           ),
-          headers: {
-            'x-cassandra-token': astraDbCredential.astraDbToken,
-          });
+          path: '/api/rest/v1/keyspaces/${astraDbCredential.keyspace}/tables',
+        ),
+        headers: {
+          'x-cassandra-token': astraDbCredential.astraDbToken,
+        });
+    try {
       var responseBody = RequestHandler.requestResponse(response);
       return responseBody;
     } on http.Response catch (response) {
@@ -34,5 +39,27 @@ abstract class AstraDbNetworkServices {
     }
   }
 
-  static Future<dynamic> getKeyspacesFromDb()async{}
+  static Future<dynamic> getKeyspacesFromDb(
+      AstraDbCredential astraDbCredential) async {
+    http.Response response = await http.get(
+      getBaseUrl(
+        scheme: 'https',
+        host: getUriHost(
+          astraDbCredential.astraDbId,
+          astraDbCredential.astraDbRegion,
+        ),
+        path: '/api/rest/v2/schemas/keyspaces',
+      ),
+      headers: {
+        'x-cassandra-token': astraDbCredential.astraDbToken,
+      },
+    );
+
+    try {
+      var responseBody = RequestHandler.requestResponse(response);
+      return responseBody;
+    } on http.Response catch (res) {
+      return jsonDecode(res.body);
+    }
+  }
 }
